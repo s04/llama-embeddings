@@ -5,7 +5,7 @@ import torch
 import uvicorn
 
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from typing import List, Optional
 
 from PIL import Image
@@ -31,6 +31,25 @@ class InputItem(BaseModel):
 
 class EmbeddingRequest(BaseModel):
     input: List[InputItem]
+
+    @field_validator('input', mode='before')
+    def parse_input(cls, v):
+        if isinstance(v, str):
+            v = [v]
+        elif not isinstance(v, list):
+            raise ValueError('Input must be a string or a list')
+        
+        input = []
+
+        for item in v:
+            if isinstance(item, str):
+                input.append({'text': item})
+            elif isinstance(item, dict):
+                input.append(item)
+            else:
+                raise ValueError('Each item in input must be a string or a dictionary')
+            
+        return input
 
 @app.post("/embeddings")
 @app.post("/v1/embeddings")

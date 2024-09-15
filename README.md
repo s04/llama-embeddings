@@ -10,15 +10,16 @@ docker run -it --rm -p 8000:8000 ghcr.io/adrianliechti/llama-embeddings
 
 ```bash
 curl https://api.jina.ai/v1/embeddings \
-	 -H "Content-Type: application/json" \
-	 -d '{
-	"input": [
-		{"text": "A blue cat"}, 
-		{"text": "A red dog"}, 
-		{"text": "btw to represent image u can either use URL or encode image into base64 like below."}, 
-		{"image": "https://i.pinimg.com/600x315/21/48/7e/21487e8e0970dd366dafaed6ab25d8d8.jpg"}, 
-		{"image": "R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7"}
-    ]}'
+  -H "Content-Type: application/json" \
+  -d '{
+        "input": [
+          "A blue cat",
+          "A red dog",
+          {"text": "btw to represent image u can either use URL or encode image into base64 like below."}, 
+          {"image": "https://i.pinimg.com/600x315/21/48/7e/21487e8e0970dd366dafaed6ab25d8d8.jpg"}, 
+          {"image": "R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7"}
+        ]
+      }'
 ```
 
 ```json
