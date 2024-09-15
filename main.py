@@ -33,6 +33,7 @@ class EmbeddingRequest(BaseModel):
     input: List[InputItem]
 
 @app.post("/embeddings")
+@app.post("/v1/embeddings")
 async def rerank(request: EmbeddingRequest):
     input = request.input
 
