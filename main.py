@@ -1,21 +1,24 @@
+import base64
+import io
+import os
 import torch
 import uvicorn
 
 from fastapi import FastAPI
-from typing import List, Optional
 from pydantic import BaseModel
+from typing import List, Optional
 
+from PIL import Image
 from transformers import AutoModel
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 model = AutoModel.from_pretrained(
-    'jinaai/jina-clip-v1',
+    os.getenv("MODEL", "jinaai/jina-clip-v1"),
     torch_dtype="auto",
     trust_remote_code=True,
-)
+).to(device)
 
-model.to(device)
 model.eval()
 
 app = FastAPI(
@@ -46,7 +49,15 @@ async def rerank(request: EmbeddingRequest):
             })
         
         if input.image:
-            embedding = model.encode_image(input.image)
+            if input.image.startswith("http://") or input.image.startswith("https://"):
+                embedding = model.encode_image(input.image)
+            else:
+                image_data = base64.b64decode(input.image)
+
+                image = Image.open(io.BytesIO(image_data))
+                image = image.convert("RGB")
+
+                embedding = model.encode_image(image)
 
             data.append({
                 "object": "embedding",
@@ -55,6 +66,8 @@ async def rerank(request: EmbeddingRequest):
             })
     
     return {
+        "object": "list",
+        "model": model.name_or_path,
         "data": data
     }
 
