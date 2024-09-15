@@ -9,7 +9,7 @@ docker run -it --rm -p 8000:8000 ghcr.io/adrianliechti/llama-embeddings
 ```
 
 ```bash
-curl https://api.jina.ai/v1/embeddings \
+curl http://localhost:8000/v1/embeddings \
   -H "Content-Type: application/json" \
   -d '{
         "input": [
