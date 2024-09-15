@@ -1,0 +1,8 @@
+accelerate
+einops
+fastapi
+pillow
+timm
+torch
+transformers
+uvicorn
