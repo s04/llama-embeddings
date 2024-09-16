@@ -1,8 +1,6 @@
-accelerate
 einops
 fastapi
 pillow
 timm
-torch
-transformers
+transformers[torch]
 uvicorn
