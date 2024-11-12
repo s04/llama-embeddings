@@ -1,7 +1,7 @@
-einops
 fastapi
-numpy<2
-pillow
-timm
-transformers[torch]
 uvicorn
+torch
+transformers
+pillow
+accelerate
+pydantic

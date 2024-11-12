@@ -6,10 +6,10 @@ Defaults to [jinaai/jina-embeddings-v3](https://huggingface.co/jinaai/jina-embed
 
 ```bash
 # Using Embeddings Model
-docker run -it --rm -p 8000:8000 -e MODEL=jinaai/jina-embeddings-v3 ghcr.io/adrianliechti/llama-embeddings
+docker run -it --rm -p 8000:8000 -e MODEL=jinaai/jina-embeddings-v3 ghcr.io/s04/llama-embeddings
 
 # Using CLIP Model
-docker run -it --rm -p 8000:8000 -e MODEL=jinaai/jina-clip-v1 ghcr.io/adrianliechti/llama-embeddings
+docker run -it --rm -p 8000:8000 -e MODEL=jinaai/jina-clip-v1 ghcr.io/s04/llama-embeddings
 ```
 
 ## Text Embeddings
